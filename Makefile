@@ -1,14 +1,11 @@
-#include <stdio.h>
-#include "get_student_id.h"
+main.out: main
+	./main|tee main.out
 
-int main(int argc, char *argv[])
-{
-	int student_id = get_student_id();
-	printf("Student ID: %d\n", student_id);
-	return 0;
-}
+main: main.o get_student_id.o
+	cc -o main main.o get_student_id.o
 
-int get_student_id(void){
-  return 5964216;
-}
-int get_student_id();
+main.o: main.c
+	cc -c main.c
+
+get_student_id.o: get_student_id.c
+	cc -c get_student_id.c
